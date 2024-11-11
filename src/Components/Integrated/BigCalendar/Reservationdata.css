@@ -1,0 +1,18 @@
+.tableContainer {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.tableHeader {
+    position: sticky;
+    top: 0;
+}
+
+.cristal .modal-content {
+    width: min-content;
+    margin: 0 auto;
+}
+
+.tableContainer tbody td {
+    text-wrap-mode:nowrap;
+}

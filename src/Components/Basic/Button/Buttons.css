@@ -1,0 +1,34 @@
+
+
+/* botones de trabajo en la interfaz */
+
+.close{
+    background-color: red;
+    width: min-content;
+    height: min-content;
+}
+
+.add{
+    background-color: lightgreen;
+    color: black;
+    font-weight: bold;
+}
+
+.cancel{
+    background-color: red;
+}
+
+.acept{
+    background-color: green;
+}
+
+
+.change{
+
+    border-radius: 50%;
+   }
+
+.change:hover{
+    border-radius: 0%;
+   }
+      

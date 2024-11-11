@@ -1,0 +1,40 @@
+.title_v{
+    margin-top: 1rem;
+    font-weight: 900;
+    font-size: 3rem;
+    color: #eeccff;
+    text-shadow: 
+    -2px -2px 0 blueviolet,
+    -1px 1px 0 blueviolet,
+    1px 1px 0 blueviolet,
+    1px -1px 0 blueviolet ;
+   
+    
+}
+.verduras{
+    display: flex;
+    width:auto;
+    height: 430px;
+    padding: 2rem 1rem;
+}
+
+.verdura{
+    border-color: blueviolet;
+    width: 0;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .8;
+    transition: .5s ease;
+}
+
+.verdura:hover {
+    cursor: crosshair;
+    width: 300px;
+    opacity: 1;
+    filter: contrast(120%);
+}
+
+.contenedor{
+    margin: 0 ;
+    /* min-width: 98vw;*/
+} 

@@ -1,0 +1,11 @@
+crear un componente button pelado, al llamar al componente
+
+	con la clase lo podes personalizar    con el texto lo haces unico
+<button className='clase p/css'> texto del botón </button>
+
+
+
+
+por eso hay que instalar boostrap
+
+es muy bueno
