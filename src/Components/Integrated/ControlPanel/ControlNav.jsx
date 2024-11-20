@@ -7,6 +7,8 @@ import Reservation from "../Reservation/Reservation";
 import BigCalendar from "../BigCalendar/BigCalendar";
 import { Button, Container, TabContainer, TabPane } from "react-bootstrap";
 import NewReservation from "../Reservation/NewReservation";
+import Clients from "../Clients/Clients";
+import clientes from "../Clients/dataClients";
 
 
 
@@ -84,8 +86,8 @@ function ControlNav() {
         <Products />
 
       </Tab>
-      <Tab eventKey="clientes" title="Clientes" tabClassName="nav-link p-2">
-        Tab content for Clientes
+      <Tab eventKey="clientes" title="Usuarios" tabClassName="nav-link p-2">
+        <Clients rows={clientes}/>
       </Tab>
     </Tabs>
 

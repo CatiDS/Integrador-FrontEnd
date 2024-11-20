@@ -8,7 +8,7 @@
 }
 
 .cristal .modal-dialog{
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 .form-check-input:checked {

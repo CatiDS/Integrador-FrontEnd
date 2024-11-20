@@ -1,23 +1,24 @@
 import React from "react";
 import Images from '../images/Images.js'
 import { Card, Col, Container, Row } from "react-bootstrap";
-
+import "./Asados.css"
 
 
 
 const Asados = () => {
     return (
         <>
+            <h2 className="title_v">El mejor Asado!</h2>
             {
-            Images.map((imagenes, i) => (
+                Images.map((imagenes, i) => (
                     <Col key={i}>
-                        <Card className="m-1">
-                            <Card.Body className="bg-dark rounded-4">
-                                <Card.Title className="text-light text-nowrap">Imagen</Card.Title>
-                                <Card.Img variant="top" key={i} src={imagenes.image} alt={imagenes.alt}/>
-                                <Card.Text className="text-light">
+                        <Card className="containBox bg-transparent border-0">
+                            <Card.Body className="rounded-4 asadoBox">
+                                {/* <Card.Title className="text-light text-nowrap">Imagen</Card.Title> */}
+                                <Card.Img variant="top" key={i} src={imagenes.image} alt={imagenes.alt} className="rounded-4 asados" />
+                                {/* <Card.Text className="text-light">
                                     El mejor Asado!
-                                </Card.Text>
+                                </Card.Text> */}
                             </Card.Body>
                         </Card>
                     </Col>

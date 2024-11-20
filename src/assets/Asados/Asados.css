@@ -1,0 +1,24 @@
+.asados{
+    /* display: flex; */
+    width:14.5rem;
+    height: 9rem;
+    padding: 0;
+    box-shadow: 0 1px 10px .25rem rgba(79, 3, 65, .25);
+
+}
+
+.asadoBox{
+    /* padding: 5rem 0; */
+    background-color: #33003388;
+    background-color: #ad80ad77;
+    backdrop-filter: blur(7px);
+    box-sizing:content-box;
+    margin: auto;
+    /* box-shadow: 0 0 0 .25rem rgba(79, 3, 65, .25); */
+    box-shadow: 1px 1px 15px 0.5px rgba(0, 0, 0, 0.4);
+
+}
+
+.containBox{
+margin: 5% auto;
+}

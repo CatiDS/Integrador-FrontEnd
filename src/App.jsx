@@ -10,8 +10,13 @@ import Contact from './Components/Integrated/Contact/Contact'
 // import './Components/Basic/Button/Buttons.css'
 import Login from './Components/Integrated/Login/Login';
 import ControlPanel from './Components/Integrated/ControlPanel/ControlPanel';
+window.addEventListener('storage', (e) => {
+  console.log(`Key Changed: ${e.key}`);
+  console.log(`New Value: ${e.newValue}`);
+});
 
 function App() {
+
 
   return (
 
@@ -23,8 +28,8 @@ function App() {
           <button className='add change'>+</button> */}
 
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/login' element={<Login/>} />
             <Route path='/panel' element={<ControlPanel/>} />

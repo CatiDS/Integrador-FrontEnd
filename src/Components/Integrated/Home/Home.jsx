@@ -12,7 +12,6 @@ function Home() {
 
                 <Row>
                     <Asados />
-
                 </Row>
 
                 <Row>
