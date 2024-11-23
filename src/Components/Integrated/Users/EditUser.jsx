@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const EditUser = (props) => {
     const navigate = useNavigate();
     const token = sessionStorage.getItem("token");
+    const [ROL, setROL] = useState(localStorage.getItem("loggedRol"));
     const url = `http://localhost:8080/usuario/mail/${props.users.mail}`
 
     const [show, setShow] = useState(false);
@@ -73,7 +74,7 @@ const EditUser = (props) => {
     }
 
     useEffect(() => {
-        if (rol === "administrador") {
+        if (ROL === "administrador") {
             setDisabled(true);
         }
         else {
@@ -89,9 +90,14 @@ const EditUser = (props) => {
 
         const form = e.currentTarget;
         if (form.checkValidity() === true) {
-            passChange ?
-                pass === pass2 ? makeFetchUser() : throwMessage("Las contraseñas no coinciden")
-                : makeFetchUser();
+           if (check) {           // si esta tildada la casilla de cambiar contraseña, verifica que sean iguales.
+            pass === pass2 ? makeFetchUser() : throwMessage("Las contraseñas no coinciden")
+            }
+            else {
+            // Dependiendo del ROL hacemos un fetch o el otro
+            // rol es el del usuario mostrado -- ROL es del usuario logueado 
+            ROL == "administrador" ? makeFetchAdmin() : makeFetchUser();
+            }
         }
         else {
             throwMessage("Completa todos los campos")
@@ -101,8 +107,8 @@ const EditUser = (props) => {
 
     const makeFetchUser = async () => {
 
-        const URL = `http://localhost:8080/usuario/${id}`;
-        const params = {
+        const URLUser = `http://localhost:8080/usuario/${id}`;
+        const paramsUser = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -115,13 +121,11 @@ const EditUser = (props) => {
                     mail: email,
                     pass: passOrig,
                     nro_tel: nrotel
-                }
-            )
-
+                })
         }
 
         try {
-            const res = await fetch(URL, params);
+            const res = await fetch(URLUser, paramsUser);
             const body = await res.json();
             if (res.status == 200) {
                 navigate("/panel");
@@ -129,29 +133,34 @@ const EditUser = (props) => {
             }
             else {
                 throwMessage(body.message)
-
             }
-
         } catch (error) {
-            console.log(error.message)
+            // console.log(error.message)
         }
         props.datos(url);
 
     }
 
     const makeFetchAdmin = async () => {
-        //         MODIFICAR ROL: put
-        // recibo del front id_usuario, nuevo rol ingresado.  (req.params.id_usuario, req.body)
-        const URL = `http://localhost:8080/usuario/rol/${id}`;
-        const params = {
+
+        // MODIFICAR ROL: put
+        // http://localhost:8080/usuario/rol/:id_usuario
+        // recibe del front id_usuario, nuevo rol ingresado.  (req.params.id_usuario, req.body)
+        const URLAdmin = `http://localhost:8080/usuario/rol/${id}`;
+        const paramsAdmin = {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': token,
+            },
             body: JSON.stringify({ rol: rol })
         }
 
         try {
-            const res = await fetch(URL, params);
+            const res = await fetch(URLAdmin, paramsAdmin);
             const body = await res.json();
+            console.log(body);
+
             if (res.status == 200) {
                 navigate("/panel");
                 handleClose();
@@ -164,6 +173,7 @@ const EditUser = (props) => {
         } catch (error) {
             console.log(error.message)
         }
+        props.datos(url);
     }
 
     return (
@@ -232,9 +242,9 @@ const EditUser = (props) => {
                                     disabled={disables}
                                 />
                             </FloatingLabel>
-
+                            {ROL !== "administrador" &&
                             <Form.Check label="Cambiar contraseña" className="user-select-none mt-3 " id="checkbox-id" hidden={disables} checked={check} onChange={changeCheck} />
-
+                            }
                             <FloatingLabel
                                 controlId="floatingPass" label="Nueva Contraseña" hidden={passChange} className="mb-3 " >
                                 <Form.Control required={false} type="password" placeholder="Nueva Contraseña" defaultValue={""} onChange={changePass}

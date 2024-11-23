@@ -12,10 +12,11 @@ const Users = () => {
 
     const [mesagge, setMessage] = useState("");
     const [incorrect, setIncorrect] = useState(false);
-    const [URL, setUrl] = useState("http://localhost:8080/usuario/")
+    const [URL, setUrl] = useState(`${(localStorage.getItem("loggedRol") == "administrador") ? "http://localhost:8080/usuario/" : `http://localhost:8080/usuario/apellido/${localStorage.getItem("loggedLastName")}`}`)
     const [datosU, setdatosU] = useState([])
     const navigate = useNavigate();
     const token = sessionStorage.getItem("token");
+    const [ROL, setROL] = useState(localStorage.getItem("loggedRol"));
 
     const params = {
         method: 'GET',
@@ -26,6 +27,7 @@ const Users = () => {
     }
 
     useEffect(() => {
+
         const makeFetch = async () => {
             try {
                 const res = await fetch(URL, params);
@@ -33,15 +35,17 @@ const Users = () => {
                 // console.log((res.status))
                 if (res.status == 200) {
                     setdatosU(body);
-                } else{   
-                    
+
+                } else {
+
                     if (res.status == 401) {
                         navigate("/");
                         throwMessage(body.message)
-                    }else{
-                    throwMessage(body.message)}
+                    } else {
+                        throwMessage(body.message)
+                    }
                 }
-    
+
 
             } catch (error) {
                 throwMessage("No se encontraron datos... intente otra consulta.")
@@ -63,15 +67,16 @@ const Users = () => {
     return (
 
         <>
-            <Container fluid className="mx-auto p-2">
-                <Row className="mx-0">
-                    <Col className="col-md-12">
-                        <FindBy datos={setUrl} />
-                    </Col>
-                </Row>
-                {incorrect && <FormLabel className="text-danger fs-3" >{mesagge}</FormLabel>}
-            </Container>
-
+            {ROL == "administrador" &&
+                <Container fluid className="mx-auto p-2">
+                    <Row className="mx-0">
+                        <Col className="col-md-12">
+                            <FindBy datos={setUrl} />
+                        </Col>
+                    </Row>
+                    {incorrect && <FormLabel className="text-danger fs-3" >{mesagge}</FormLabel>}
+                </Container>
+            }
 
             <div style={{
                 maxHeight: "23rem",
@@ -109,7 +114,7 @@ const Users = () => {
                                 <td>{row.rol}</td>
                                 <td>
                                     <EditUser key="edit" users={row} datos={setUrl} />
-                                    <DeleteClient users={row} datos={setUrl}/>
+                                    <DeleteClient users={row} datos={setUrl} />
                                 </td>
                             </tr>
                         ))}
