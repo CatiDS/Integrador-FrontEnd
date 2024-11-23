@@ -4,24 +4,64 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { FormLabel } from 'react-bootstrap';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 const DeleteClient = (props) => {
+    const token = sessionStorage.getItem("token");
+    let URL = `http://localhost:8080/usuario/mail/${props.users.mail}`
+    const url = `http://localhost:8080/usuario/`
+
+    const [mesagge, setMessage] = useState("");
+    const [incorrect, setIncorrect] = useState(false);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        props.datos(URL);
+        setShow(true);
+    }
 
+    // ELIMINAR USUARIO:  delete
+    // http://localhost:8080/usuario/:id_usuario
 
-    const mostrar = () => console.log("todo ok, implementar el cambio put a db");
-    // const [tables, setTables]= useState([]);
-    // useEffect(
-    //     ()=>{
-    //         fetch('URL').then(response=>response.json()).then(data=>setTables(data));
-    //     },
-    //     [funcion de disparo]
-    // )
+    const params = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': token,
+        },
+    }
+
+    //-----------------------------------------------------------------------------
+    const deleteUser = async () => {
+        URL = `http://localhost:8080/usuario/${props.users.id_usuario}`
+        console.log(URL)
+
+        try {
+            const res = await fetch(URL, params);
+            const body = await res.json();
+            if (res.status == 200) {
+                handleClose();
+            }
+            else {
+                console.log(body.error)
+                throwMessage(body.message)
+            }
+        }
+        catch (error) {
+            console.log(error.message)
+        }
+        props.datos(url);
+    }
+
+    const throwMessage = (newMessage) => {
+        setMessage(newMessage)
+        setIncorrect(true);
+        setTimeout(() => {
+            setIncorrect(false);
+        }, 3000);
+    }
 
 
     return (
@@ -41,20 +81,19 @@ const DeleteClient = (props) => {
                 backdrop="static"
                 keyboard={false}
                 className='cristal px-0'
-
             >
                 <Modal.Header closeButton>
                     <Modal.Title className='fw-bolder fs-3 text-dark'> Eliminar Cuenta </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <>
-                    <FormLabel className='fw-bolder fs-5 text-danger text-nowrap mb-4'>Atencion, está por eliminar la cuenta!</FormLabel>
-                    <FloatingLabel
+                        <FormLabel className='fw-bolder fs-5 text-danger text-nowrap mb-4'>Atencion, está por eliminar la cuenta!</FormLabel>
+                        <FloatingLabel
                             controlId="floatingName"
                             label="Nombre"
                             className="mb-3"
                         >
-                            <Form.Control type="text" placeholder="Nombre" value={props.users.nombre} readOnly/>
+                            <Form.Control type="text" placeholder="Nombre" value={props.users.nombre} readOnly />
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -62,7 +101,7 @@ const DeleteClient = (props) => {
                             label="Apellido"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Apellido" value={props.users.apellido} readOnly/>
+                            <Form.Control type="text" placeholder="Apellido" value={props.users.apellido} readOnly />
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -70,7 +109,7 @@ const DeleteClient = (props) => {
                             label="Email"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Email" value={props.users.mail} readOnly/>
+                            <Form.Control type="text" placeholder="Email" value={props.users.mail} readOnly />
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -78,7 +117,7 @@ const DeleteClient = (props) => {
                             label="Teléfono"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Teléfono" value={props.users.nro_tel} readOnly/>
+                            <Form.Control type="text" placeholder="Teléfono" value={props.users.nro_tel} readOnly />
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -86,17 +125,18 @@ const DeleteClient = (props) => {
                             label="Rol"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Rol" value={props.users.rol} readOnly/>
+                            <Form.Control type="text" placeholder="Rol" value={props.users.rol} readOnly />
                         </FloatingLabel>
 
                     </>
+                    {incorrect && <FormLabel className="text-danger fs-3" >{mesagge}</FormLabel>}
 
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="dark" onClick={mostrar}>Eliminar</Button>
+                    <Button variant="dark" onClick={deleteUser}>Eliminar</Button>
                 </Modal.Footer>
             </Modal>
         </>

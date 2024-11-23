@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap'
 import { FcSearch } from 'react-icons/fc'
+import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap'
 
 
 const FindBy = (props) => {

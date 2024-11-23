@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 
 const EditUser = (props) => {
     const navigate = useNavigate();
+    const token = sessionStorage.getItem("token");
+    const url = `http://localhost:8080/usuario/mail/${props.users.mail}`
 
     const [show, setShow] = useState(false);
     const [validate, setValidate] = useState(false);
@@ -103,7 +105,8 @@ const EditUser = (props) => {
         const params = {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': token,
             },
             body: JSON.stringify(
                 {
@@ -113,13 +116,11 @@ const EditUser = (props) => {
                     pass: passOrig,
                     nro_tel: nrotel
                 }
-            ) 
+            )
 
         }
 
         try {
-            console.log(URL, params)
-
             const res = await fetch(URL, params);
             const body = await res.json();
             if (res.status == 200) {
@@ -128,13 +129,14 @@ const EditUser = (props) => {
             }
             else {
                 throwMessage(body.message)
-                console.log(body.message)
 
             }
 
         } catch (error) {
             console.log(error.message)
         }
+        props.datos(url);
+
     }
 
     const makeFetchAdmin = async () => {

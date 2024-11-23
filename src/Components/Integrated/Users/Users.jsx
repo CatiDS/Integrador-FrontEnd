@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/Button';
-import { FormLabel, Table } from 'react-bootstrap';
 import './Users.css';
-import EditUser from './EditUser.jsx';
-import DeleteClient from './DeleteClient.jsx';
 import FindBy from './FindBy.jsx'
-import { Col, Container, Row } from "react-bootstrap";
+import EditUser from './EditUser.jsx';
+import Button from 'react-bootstrap/Button';
+import DeleteClient from './DeleteClient.jsx';
+import { useNavigate } from 'react-router-dom';
 import { FcSearch, FcPlus } from "react-icons/fc";
+import React, { useEffect, useState } from 'react'
+import { FormLabel, Table, Col, Container, Row } from "react-bootstrap";
 
 const Users = () => {
 
@@ -14,7 +14,7 @@ const Users = () => {
     const [incorrect, setIncorrect] = useState(false);
     const [URL, setUrl] = useState("http://localhost:8080/usuario/")
     const [datosU, setdatosU] = useState([])
-
+    const navigate = useNavigate();
     const token = sessionStorage.getItem("token");
 
     const params = {
@@ -28,12 +28,22 @@ const Users = () => {
     useEffect(() => {
         const makeFetch = async () => {
             try {
-                console.log(token);
                 const res = await fetch(URL, params);
                 const body = await res.json();
-                setdatosU(body);
+                // console.log((res.status))
+                if (res.status == 200) {
+                    setdatosU(body);
+                } else{   
+                    
+                    if (res.status == 401) {
+                        navigate("/");
+                        throwMessage(body.message)
+                    }else{
+                    throwMessage(body.message)}
+                }
+    
+
             } catch (error) {
-                // console.log(error)
                 throwMessage("No se encontraron datos... intente otra consulta.")
             }
         }
@@ -98,8 +108,8 @@ const Users = () => {
                                 <td>{row.nro_tel}</td>
                                 <td>{row.rol}</td>
                                 <td>
-                                    <EditUser key="edit" users={row} />
-                                    <DeleteClient users={row} />
+                                    <EditUser key="edit" users={row} datos={setUrl} />
+                                    <DeleteClient users={row} datos={setUrl}/>
                                 </td>
                             </tr>
                         ))}
