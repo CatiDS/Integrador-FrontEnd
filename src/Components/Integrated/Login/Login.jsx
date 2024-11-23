@@ -10,7 +10,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { jwtDecode } from "jwt-decode";
 
 
-function Login() {
+function Login(props) {
 
     const navigate = useNavigate();
 
@@ -23,13 +23,14 @@ function Login() {
 
     const [mesagge, setMessage] = useState("");
 
-    var hidden = false;
+    var hiddens=props.see;    
 
     const changeEmail = (e) => setEmail(e.target.value);
     const changePass = (e) => setPass(e.target.value);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {setShow(false); props.actoIN(false);}
     const handleShow = () => setShow(true);
+   
 
 
     const handleCancel = () => {
@@ -55,6 +56,7 @@ function Login() {
         const form = e.currentTarget;
         if (form.checkValidity() === true) {
             makeFetch();
+
         }
         else {
             throwMessage("Completa todos los campos")
@@ -86,17 +88,16 @@ function Login() {
             localStorage.setItem("logged", false);
             const res = await fetch(URL, params);
             const body = await res.json();
-            console.log(body);
             if (res.status == 200) {
-                sessionStorage.setItem("token", body.token);
+                sessionStorage.setItem("token", body.token); //ver si local storage
                 localStorage.setItem("logged", true);
-                hidden=true;
                 navigate("/");
                 handleClose();
                 const decoded = jwtDecode(body.token);
                 localStorage.setItem("loggedName", decoded.nombre);
                 localStorage.setItem("loggedLastName", decoded.apellido);
                 localStorage.setItem("loggedRol", decoded.rol);
+
 
             }
             else {
@@ -105,12 +106,13 @@ function Login() {
         } catch (error) {
 
         }
+
     }
 
     return (
 
         <>
-            <ButtonToolbar hidden={hidden} className="p-1 my-1 mx-2 btn btn-outline-light" type="button" onClick={handleShow}>Ingresar</ButtonToolbar>
+            <ButtonToolbar hidden={hiddens} className="p-1 my-1 mx-2 btn btn-outline-light" type="button" onClick={handleShow}>Ingresar</ButtonToolbar>
 
             <Modal
                 show={show}
@@ -118,7 +120,7 @@ function Login() {
                 backdrop="static"
                 keyboard={false}
                 className='cristal'
-            >
+            > 
                 <Modal.Header closeButton>
                     <Modal.Title className='fw-bolder fs-3 text-dark text-nowrap ' >Ingresa a tu cuenta</Modal.Title>
                 </Modal.Header>

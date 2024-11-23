@@ -10,14 +10,38 @@ import LogOut from "./LogOut/LogOut.jsx";
 
 function Header() {
 
-    var name = " ";
-        const logg = localStorage.getItem("logged");
-    
-        if (logg) {
+    const[hiddens, setHiddens] =useState("");    
+    const[name, setName] =useState("");    
+    const[logg,setLogg]=useState(localStorage.getItem("logged"));
+    const[acto, setacto] =useState(true);    
+
+
+    useEffect(() => {
+        // const logg = localStorage.getItem("logged");
+        // console.log(logg)
+
+        if (logg=="true") {
             const lName=localStorage.getItem("loggedName");
             const lLName = localStorage.getItem("loggedLastName");
-            name = (lLName+" " + lName);
+            setName (lLName+" " + lName);
+        
+            setHiddens(true);
+            // setLogg(localStorage.getItem("logged"));
+            acto?setHiddens(true):setHiddens(false);
+            // setacto(false);
+        console.log(acto)
+
         }
+        else {
+            setHiddens(false);
+            // acto?setHiddens(false):setHiddens(true);
+            // setacto(true);
+            // console.log(acto)
+
+        }
+
+       },
+        [acto]);
 
 
     return (
@@ -31,9 +55,10 @@ function Header() {
                         <Nav.Link href="/about" className="me-2 ">Nosotros</Nav.Link>
                         <Nav.Link href="/contact" className="me-auto">Contactanos</Nav.Link>
 
-                        <Register className="registerButton" />
-                        <Login className="loginButton" />
-                        <LogOut className="loginButton" />
+                        {/* {                        hiddens?setLogg(localStorage.getItem("logged")):<Register see={hiddens} acto={setacto} className="registerButton" />} */}
+                        <Register see={hiddens} acto={setacto} className="registerButton" />
+                        <Login see={hiddens} actoIN={setacto} className="loginButton" />
+                        <LogOut see={hiddens} acto={setacto} className="logOutButton" />
                     </Nav>
                 </Navbar.Collapse>
             </Container>

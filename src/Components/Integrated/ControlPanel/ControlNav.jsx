@@ -7,14 +7,17 @@ import Reservation from "../Reservation/Reservation";
 import BigCalendar from "../BigCalendar/BigCalendar";
 import { Button, Container, TabContainer, TabPane } from "react-bootstrap";
 import NewReservation from "../Reservation/NewReservation";
-import Clients from "../Clients/Clients";
-import clientes from "../Clients/dataClients";
+import Users from "../Users/Users";
+// import clientes from "../Users/dataClients";
 
 
 
 function ControlNav() {
 
   const [isActive, setActive] = useState(true);
+  const [client, setClient] = useState(true);
+  const [waiter, setwaiter] = useState(true);
+  const [cashier, setCashier] = useState(true);
 
   const nroMesas = [];
 
@@ -73,8 +76,8 @@ function ControlNav() {
       <Tab eventKey="reservas" title="Reservas" tabClassName="nav-link p-2">
         {/* <Reservation /> Ver si es necesario */}
         {/* <Container flex className="flex"> */}
-          <NewReservation className="align-self-end"/>
-          <Button className="ms-0" onClick={armandoMesas}>  Armar mesas </Button>
+        <NewReservation className="align-self-end" />
+        <Button className="ms-0" onClick={armandoMesas}>  Armar mesas </Button>
         {/* </Container> */}
 
         <BigCalendar />
@@ -87,7 +90,7 @@ function ControlNav() {
 
       </Tab>
       <Tab eventKey="clientes" title="Usuarios" tabClassName="nav-link p-2">
-        <Clients rows={clientes}/>
+        <Users />
       </Tab>
     </Tabs>
 

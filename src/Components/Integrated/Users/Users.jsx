@@ -1,43 +1,68 @@
 import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
-import { Table } from 'react-bootstrap';
-import './Clients.css';
-import EditClient from './EditClient.jsx';
-import DeleteClient from './DeleteClient';
+import { FormLabel, Table } from 'react-bootstrap';
+import './Users.css';
+import EditUser from './EditUser.jsx';
+import DeleteClient from './DeleteClient.jsx';
+import FindBy from './FindBy.jsx'
 import { Col, Container, Row } from "react-bootstrap";
 import { FcSearch, FcPlus } from "react-icons/fc";
 
+const Users = () => {
 
-const URL = "http://localhost:8080/usuario/";
-const params = {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-}
+    const [mesagge, setMessage] = useState("");
+    const [incorrect, setIncorrect] = useState(false);
+    const [URL, setUrl] = useState("http://localhost:8080/usuario/")
+    const [datosU, setdatosU] = useState([])
 
+    const token = sessionStorage.getItem("token");
 
-const Clients = () => {
+    const params = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': token,
+        },
+    }
 
-    const [datosU, setdatosU] =useState([])
-
-    useEffect(()=>{
+    useEffect(() => {
         const makeFetch = async () => {
             try {
+                console.log(token);
                 const res = await fetch(URL, params);
                 const body = await res.json();
-                setdatosU (body);
+                setdatosU(body);
             } catch (error) {
-                console.log(error.message)
+                // console.log(error)
+                throwMessage("No se encontraron datos... intente otra consulta.")
             }
         }
         makeFetch();
     },
-    [])
+        [URL]);
+
+    const throwMessage = (newMessage) => {
+        setMessage(newMessage)
+        setIncorrect(true);
+        setTimeout(() => {
+            setIncorrect(false);
+        }, 3000);
+    }
+
 
     return (
 
         <>
+            <Container fluid className="mx-auto p-2">
+                <Row className="mx-0">
+                    <Col className="col-md-12">
+                        <FindBy datos={setUrl} />
+                    </Col>
+                </Row>
+                {incorrect && <FormLabel className="text-danger fs-3" >{mesagge}</FormLabel>}
+            </Container>
+
+
             <div style={{
                 maxHeight: "23rem",
                 overflowY: "auto",
@@ -73,8 +98,8 @@ const Clients = () => {
                                 <td>{row.nro_tel}</td>
                                 <td>{row.rol}</td>
                                 <td>
-                                    <EditClient key="edit" clients={row} />
-                                    <DeleteClient clients={row} />
+                                    <EditUser key="edit" users={row} />
+                                    <DeleteClient users={row} />
                                 </td>
                             </tr>
                         ))}
@@ -82,24 +107,8 @@ const Clients = () => {
                 </Table>
             </div>
 
-
-
-            <Container fluid className="mx-auto p-2">
-                <Row className="mx-0">
-                    <Col className="col-md-6 ">
-                        <Button variant="success"
-                        // onClick={makeFetch}
-                        > Agregar <FcPlus size={25} /> </Button>
-                        {/* ver si poner */}
-                    </Col>
-                    <Col className="col-md-6">
-                        <Button variant="dark" className='me-auto'>Buscar <FcSearch size={25} /></Button>
-                        {/* cambiar por findBY */}
-                    </Col>
-                </Row>
-            </Container>
         </>
     )
 }
 
-export default Clients
+export default Users

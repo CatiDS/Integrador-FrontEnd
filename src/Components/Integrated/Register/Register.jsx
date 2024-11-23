@@ -9,8 +9,12 @@ import { ButtonToolbar, FormLabel } from "react-bootstrap";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useNavigate } from "react-router-dom";
 
-function Register() {
+function Register(props) {
     const navigate = useNavigate();
+    var hiddens = props.see;
+
+    // var hiddens;    
+    //  localStorage.getItem("logged")?hiddens = true:hiddens = false;
 
     const [show, setShow] = useState(false);
     const [validate, setValidate] = useState(false);
@@ -61,7 +65,7 @@ function Register() {
         setIncomplete(true);
         setTimeout(() => {
             setIncomplete(false);
-        }, 1500);
+        }, 2000);
     }
 
     const handleRegister = (e) => {
@@ -75,7 +79,7 @@ function Register() {
             pass === pass2 ? makeFetch() : throwMessage("Las contraseñas no coinciden");
         }
         else {
-            throwMessage("Completa todos los campos")
+            throwMessage("Completa todos los campos");
         }
     };
 
@@ -87,6 +91,7 @@ function Register() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                // 'authorization':'token',
             },
 
             body: JSON.stringify(
@@ -98,15 +103,19 @@ function Register() {
                     nro_tel: phone
                 })
         }
+
         try {
             const res = await fetch(URL, params);
             const body = await res.json();
-            if (res.status == 200) {
+            console.log(body);
+            if (res.status == 201) {
                 navigate("/");
-                handleClose();
+                handleCancel();
+
             }
             else {
-                throwMessage(body.message)
+                res.status == 590 && throwMessage("El Email ya se encuentra registrado.");
+
             }
         } catch (error) {
 
@@ -116,7 +125,7 @@ function Register() {
     return (
 
         <>
-            <ButtonToolbar className="registerButton p-1 my-1 mx-2 btn btn-outline-light align-self-end" type="button" onClick={handleShow}>Regístrate</ButtonToolbar>
+            <ButtonToolbar hidden={hiddens} className="registerButton p-1 my-1 mx-2 btn btn-outline-light align-self-end" type="button" onClick={handleShow}>Regístrate</ButtonToolbar>
 
             <Modal
                 show={show}
@@ -132,9 +141,8 @@ function Register() {
                 <Form noValidate validated={validate} onSubmit={handleRegister}>
                     <Modal.Body>
                         <>
-
                             <FloatingLabel controlId="lastNameR" label="Apellido" className="mb-3 ">
-                                <Form.Control required type="text" value={lastName} onChange={changeLastName} minLength={2} maxLength={50}/>
+                                <Form.Control required type="text" value={lastName} onChange={changeLastName} minLength={2} maxLength={50} />
                                 <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
                             </FloatingLabel>
 
@@ -144,7 +152,7 @@ function Register() {
                             </FloatingLabel>
 
                             <FloatingLabel controlId="floatingInputR" label="Teléfono" className="mb-3 ">
-                                <Form.Control required type="tel" value={phone} onChange={changePhone} pattern="[0-9]{10}"/>
+                                <Form.Control required type="tel" value={phone} onChange={changePhone} pattern="[0-9]{10}" />
                                 <Form.Control.Feedback type="invalid">Ingresá un Teléfono válido - Sin 0 ni 15</Form.Control.Feedback>
                             </FloatingLabel>
 
@@ -154,9 +162,9 @@ function Register() {
                             </FloatingLabel>
 
                             <FloatingLabel controlId="floatingPassR" label="Contraseña" className="mb-3 ">
-                                <Form.Control required type="password" value={pass} onChange={changePass}  minLength={6} maxLength={16}/> {/* type={verPass} */}
+                                <Form.Control required type="password" value={pass} onChange={changePass} minLength={6} maxLength={16} /> {/* type={verPass} */}
                                 {/* <FaRegEye fill=" rgb(120, 3, 100)" id='verPass1' className='verPass'/> */}
-                                <Form.Control.Feedback type="invalid">[6-10] Caracteres</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">[6-16] Caracteres</Form.Control.Feedback>
                             </FloatingLabel>
 
                             <FloatingLabel controlId="floatingPasswordR" label="Confirmar contraseña">

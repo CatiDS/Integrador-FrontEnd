@@ -7,20 +7,20 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { FormLabel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const EditClient = (props) => {
+const EditUser = (props) => {
     const navigate = useNavigate();
 
     const [show, setShow] = useState(false);
     const [validate, setValidate] = useState(false);
 
-    const id = props.clients.id_usuario;
-    const [lastname, setLastName] = useState(props.clients.apellido);
-    const [name, setName] = useState(props.clients.nombre);
-    const [email, setEmail] = useState(props.clients.mail);
-    const [nrotel, setNTel] = useState(props.clients.nro_tel);
+    const id = props.users.id_usuario;
+    const [lastname, setLastName] = useState(props.users.apellido);
+    const [name, setName] = useState(props.users.nombre);
+    const [email, setEmail] = useState(props.users.mail);
+    const [nrotel, setNTel] = useState(props.users.nro_tel);
     const [pass, setPass] = useState("");
     const [pass2, setPass2] = useState("");
-    const [rol, setRol] = useState(props.clients.rol);
+    const [rol, setRol] = useState(props.users.rol);
     const [disables, setDisabled] = useState(true);
     const [passChange, setPassChange] = useState(true);
     const [passOrig, setPassOrig] = useState(true);
@@ -47,11 +47,11 @@ const EditClient = (props) => {
 
     }
     const handleCancel = () => {
-        setName(props.clients.nombre);
-        setLastName(props.clients.apellido);
-        setEmail(props.clients.mail);
-        setNTel(props.clients.nro_tel);
-        setRol(props.clients.rol);
+        setName(props.users.nombre);
+        setLastName(props.users.apellido);
+        setEmail(props.users.mail);
+        setNTel(props.users.nro_tel);
+        setRol(props.users.rol);
 
         handleClose();
     }
@@ -113,7 +113,7 @@ const EditClient = (props) => {
                     pass: passOrig,
                     nro_tel: nrotel
                 }
-            )
+            ) 
 
         }
 
@@ -192,27 +192,27 @@ const EditClient = (props) => {
 
                             <FloatingLabel
                                 controlId="floatingLastName" label="Apellido" className="mb-3 " >
-                                <Form.Control required type="text" placeholder="Apellido" defaultValue={props.clients.apellido} onChange={changeLastName} disabled={disables} minLength={2} maxLength={50} />
+                                <Form.Control required type="text" placeholder="Apellido" defaultValue={props.users.apellido} onChange={changeLastName} disabled={disables} minLength={2} maxLength={50} />
                                 <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
                             </FloatingLabel>
 
                             <FloatingLabel controlId="floatingName" label="Nombre" className="mb-3 " >
-                                <Form.Control required type="text" placeholder="Nombre" defaultValue={props.clients.nombre} onChange={changeName} disabled={disables} minLength={2} maxLength={50} />
+                                <Form.Control required type="text" placeholder="Nombre" defaultValue={props.users.nombre} onChange={changeName} disabled={disables} minLength={2} maxLength={50} />
                                 <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
                             </FloatingLabel>
 
                             <FloatingLabel controlId="floatingPhone" label="Teléfono" className="mb-3 " >
-                                <Form.Control required type="tel" pattern="[0-9]{10}" placeholder="Teléfono" defaultValue={props.clients.nro_tel} onChange={changeNTel} disabled={disables} />
+                                <Form.Control required type="tel" pattern="[0-9]{10}" placeholder="Teléfono" defaultValue={props.users.nro_tel} onChange={changeNTel} disabled={disables} />
                                 <Form.Control.Feedback type="invalid">Ingresá un Teléfono válido - Sin 0 ni 15</Form.Control.Feedback>
                             </FloatingLabel>
 
                             <FloatingLabel controlId="floatingEmail" label="Email" className="mb-3 " >
-                                <Form.Control required type="email" placeholder="Email" defaultValue={props.clients.mail} onChange={changeEmail} disabled={disables} />
+                                <Form.Control required type="email" placeholder="Email" defaultValue={props.users.mail} onChange={changeEmail} disabled={disables} />
                                 <Form.Control.Feedback type="invalid">Ingresá un correo válido</Form.Control.Feedback>
                             </FloatingLabel>
 
                             <FloatingLabel controlId="floatingInput" label="Rol" className="mb-3 " hidden={!disables} >
-                                <Form.Select required type="text" aria-label="Cambiar rol de usuario" placeholder="Rol" defaultValue={props.clients.rol} onChange={changeRol}
+                                <Form.Select required type="text" aria-label="Cambiar rol de usuario" placeholder="Rol" defaultValue={props.users.rol} onChange={changeRol}
                                     hidden={!disables}
                                     disabled={!disables}
                                 >
@@ -269,4 +269,4 @@ const EditClient = (props) => {
     )
 }
 
-export default EditClient
+export default EditUser

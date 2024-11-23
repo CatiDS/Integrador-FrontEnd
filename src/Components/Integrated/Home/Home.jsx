@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import "./Home.css"
+// import "./Home.css"
 import ZoomBanner from "./Zoom-Banner/ZoomBanner";
 import Asados from "../../../assets/Asados/Asados";
 

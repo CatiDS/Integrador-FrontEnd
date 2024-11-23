@@ -7,8 +7,8 @@ import Footer from './Components/Integrated/Footer/Footer'
 import Home from './Components/Integrated/Home/Home'
 import About from './Components/Integrated/About/About'
 import Contact from './Components/Integrated/Contact/Contact'
-// import './Components/Basic/Button/Buttons.css'
 import Login from './Components/Integrated/Login/Login';
+import NotFound from './Components/Integrated/NotFound/NotFound';
 import ControlPanel from './Components/Integrated/ControlPanel/ControlPanel';
 window.addEventListener('storage', (e) => {
   console.log(`Key Changed: ${e.key}`);
@@ -23,9 +23,6 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        {/* <main>
-          <h1>Novillo</h1>
-          <button className='add change'>+</button> */}
 
           <Routes>
           <Route path='/' element={<Home />} />
@@ -33,7 +30,7 @@ function App() {
             <Route path='/contact' element={<Contact />} />
             <Route path='/login' element={<Login/>} />
             <Route path='/panel' element={<ControlPanel/>} />
-            <Route path='*' element={<Home/>} />
+            <Route path='*' element={<NotFound/>} />
 
           </Routes>
         {/* </main> */}

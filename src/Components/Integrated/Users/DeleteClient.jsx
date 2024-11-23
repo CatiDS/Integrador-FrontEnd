@@ -54,7 +54,7 @@ const DeleteClient = (props) => {
                             label="Nombre"
                             className="mb-3"
                         >
-                            <Form.Control type="text" placeholder="Nombre" value={props.clients.nombre} readOnly/>
+                            <Form.Control type="text" placeholder="Nombre" value={props.users.nombre} readOnly/>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -62,7 +62,7 @@ const DeleteClient = (props) => {
                             label="Apellido"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Apellido" value={props.clients.apellido} readOnly/>
+                            <Form.Control type="text" placeholder="Apellido" value={props.users.apellido} readOnly/>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -70,7 +70,7 @@ const DeleteClient = (props) => {
                             label="Email"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Email" value={props.clients.mail} readOnly/>
+                            <Form.Control type="text" placeholder="Email" value={props.users.mail} readOnly/>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -78,7 +78,7 @@ const DeleteClient = (props) => {
                             label="Teléfono"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Teléfono" value={props.clients.nro_tel} readOnly/>
+                            <Form.Control type="text" placeholder="Teléfono" value={props.users.nro_tel} readOnly/>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -86,7 +86,7 @@ const DeleteClient = (props) => {
                             label="Rol"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Rol" value={props.clients.rol} readOnly/>
+                            <Form.Control type="text" placeholder="Rol" value={props.users.rol} readOnly/>
                         </FloatingLabel>
 
                     </>

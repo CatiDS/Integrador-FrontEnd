@@ -3,21 +3,22 @@ import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { ButtonToolbar } from "react-bootstrap";
 
-function LogOut() {
+function LogOut(props) {
 
     const navigate = useNavigate();
-    var hiddens = false;
+    var hiddens=!props.see;    
 
     const handleOut = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // hiddens= false;
         sessionStorage.removeItem("token");
         localStorage.removeItem("loggedName");
         localStorage.removeItem("loggedLastName");
         localStorage.removeItem("loggedRol");
         localStorage.setItem("logged", false);
         navigate("/");
+        props.acto(false);
+        
     };
 
     return (
