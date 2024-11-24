@@ -11,10 +11,6 @@ import { useNavigate } from "react-router-dom";
 
 function Register(props) {
     const navigate = useNavigate();
-    var hiddens = props.see;
-
-    // var hiddens;    
-    //  localStorage.getItem("logged")?hiddens = true:hiddens = false;
 
     const [show, setShow] = useState(false);
     const [validate, setValidate] = useState(false);
@@ -26,9 +22,12 @@ function Register(props) {
     const [pass, setPass] = useState("");
     const [pass2, setPass2] = useState("");
     const [incomplete, setIncomplete] = useState(false);
+
+
     // const [verPass, setverPass] = useState("password");
-    // const [verPass2, setverPass2] = useState("password");
     // const [eyePass, seteyePass] = useState("password");
+    
+    // const [verPass2, setverPass2] = useState("password");
     // const [eyePass2, seteyePass2] = useState("password");
 
     const [mesagge, setMessage] = useState("");
@@ -60,7 +59,7 @@ function Register(props) {
         handleClose();
     }
 
-    const throwMessage = (newMessage) => {
+    const throwMessage = (newMessage) => {              //Lanzador de mensajes
         setMessage(newMessage)
         setIncomplete(true);
         setTimeout(() => {
@@ -76,6 +75,8 @@ function Register(props) {
 
         const form = e.currentTarget;
         if (form.checkValidity() === true) {
+
+            //si se cumplen todas las validaciones, verifica que las contrseñas sean iguales y entonces llama a la funcion para hacer el fetch
             pass === pass2 ? makeFetch() : throwMessage("Las contraseñas no coinciden");
         }
         else {
@@ -91,7 +92,6 @@ function Register(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'authorization':'token',
             },
 
             body: JSON.stringify(
@@ -111,7 +111,6 @@ function Register(props) {
             if (res.status == 201) {
                 navigate("/");
                 handleCancel();
-
             }
             else {
                 res.status == 590 && throwMessage("El Email ya se encuentra registrado.");
@@ -182,7 +181,6 @@ function Register(props) {
                             Cancelar
                         </Button>
                         <Button type="submit" variant="dark">Registrarme</Button>
-
                     </Modal.Footer>
                 </Form>
             </Modal>

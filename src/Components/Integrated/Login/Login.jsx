@@ -23,14 +23,11 @@ function Login(props) {
 
     const [mesagge, setMessage] = useState("");
 
-    var hiddens=props.see;    
-
     const changeEmail = (e) => setEmail(e.target.value);
     const changePass = (e) => setPass(e.target.value);
 
-    const handleClose = () => {setShow(false); props.actoIN(false);}
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-   
 
 
     const handleCancel = () => {
@@ -56,7 +53,6 @@ function Login(props) {
         const form = e.currentTarget;
         if (form.checkValidity() === true) {
             makeFetch();
-
         }
         else {
             throwMessage("Completa todos los campos")
@@ -79,17 +75,19 @@ function Login(props) {
                 })
         }
 
-        try {
+        try {                                           //asegura que no existan los items que vamos a crear
             sessionStorage.removeItem("token");
             localStorage.removeItem("loggedName");
             localStorage.removeItem("loggedLastName");
             localStorage.removeItem("loggedRol");
-
             localStorage.setItem("logged", false);
-            const res = await fetch(URL, params);
+
+            const res = await fetch(URL, params);       //fetch y respuesta
             const body = await res.json();
-            if (res.status == 200) {
-                sessionStorage.setItem("token", body.token); //ver si local storage
+            
+            if (res.status == 200) {                 // seteamos los valores de nombre,apellido, rol, logueado y token
+
+                sessionStorage.setItem("token", body.token);
                 localStorage.setItem("logged", true);
                 navigate("/");
                 handleClose();
@@ -97,7 +95,7 @@ function Login(props) {
                 localStorage.setItem("loggedName", decoded.nombre);
                 localStorage.setItem("loggedLastName", decoded.apellido);
                 localStorage.setItem("loggedRol", decoded.rol);
-
+                props.in(true);                // cambia el estado de logg para disparar el useEffect
 
             }
             else {
@@ -112,7 +110,7 @@ function Login(props) {
     return (
 
         <>
-            <ButtonToolbar hidden={hiddens} className="p-1 my-1 mx-2 btn btn-outline-light" type="button" onClick={handleShow}>Ingresar</ButtonToolbar>
+            <ButtonToolbar className="p-1 my-1 mx-2 btn btn-outline-light" type="button" onClick={handleShow}>Ingresar</ButtonToolbar>
 
             <Modal
                 show={show}
@@ -120,7 +118,7 @@ function Login(props) {
                 backdrop="static"
                 keyboard={false}
                 className='cristal'
-            > 
+            >
                 <Modal.Header closeButton>
                     <Modal.Title className='fw-bolder fs-3 text-dark text-nowrap ' >Ingresa a tu cuenta</Modal.Title>
                 </Modal.Header>

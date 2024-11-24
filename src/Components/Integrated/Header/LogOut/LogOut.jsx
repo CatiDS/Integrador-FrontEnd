@@ -1,14 +1,12 @@
-// import "./LogOut.css"
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { ButtonToolbar } from "react-bootstrap";
 
 function LogOut(props) {
 
     const navigate = useNavigate();
-    var hiddens=!props.see;    
 
-    const handleOut = (e) => {
+    const handleOut = (e) => {          //Borra los items que correspondan a la sesion del usuario
         e.preventDefault();
         e.stopPropagation();
         sessionStorage.removeItem("token");
@@ -17,13 +15,13 @@ function LogOut(props) {
         localStorage.removeItem("loggedRol");
         localStorage.setItem("logged", false);
         navigate("/");
-        props.acto(false);
-        
+        props.out(false);               // cambia el estado de logg para disparar el useEffect
+
     };
 
     return (
         <>
-            <ButtonToolbar hidden={hiddens} className="p-1 my-1 mx-2 btn btn-outline-light" type="button" onClick={handleOut}>Salir</ButtonToolbar>
+            <ButtonToolbar className="p-1 my-1 mx-2 btn btn-outline-light" type="button" onClick={handleOut}>Salir</ButtonToolbar>
         </>
 
     )
