@@ -85,7 +85,7 @@ function Login(props) {
 
             const res = await fetch(URL, params);       //fetch y respuesta
             const body = await res.json();
-            console.log (body)
+            // console.log (body)
             if (res.status == 200) {                 // seteamos los valores de nombre,apellido, rol, logueado y token
 
                 sessionStorage.setItem("token", body.token);

@@ -50,7 +50,7 @@ function Tables(props) {
         <>
 
 
-            <Button className="p-4 my-1 mx-2 btn btn-outline-light" type="button" onClick={handleShow}>{props.nro}</Button>
+            <Button className="p-5 my-2 mx-3 btn btn-outline-light" type="button" onClick={handleShow}>{props.nro}</Button>
 
             <Modal
                 show={show}
@@ -73,10 +73,10 @@ function Tables(props) {
                             overflowY: "auto"
                         }}>
 
-                            {/* Create a React Bootstrap Table with striped, bordered, and hover styles */}
+
                             <Table striped bordered hover>
 
-                                {/* Define the table header */}
+
                                 <thead style={{
                                     position: "sticky",
                                     top: "0"

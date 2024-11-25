@@ -159,7 +159,7 @@ const EditUser = (props) => {
         try {
             const res = await fetch(URLAdmin, paramsAdmin);
             const body = await res.json();
-            console.log(body);
+            // console.log(body);
 
             if (res.status == 200) {
                 navigate("/panel");

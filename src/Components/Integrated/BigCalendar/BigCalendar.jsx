@@ -26,7 +26,7 @@ const BigCalendar = () => {
     const rutaAdmin = "http://localhost:8080/reserva/";
     const rutaUser = `http://localhost:8080/reserva/buscar/${localStorage.getItem("loggedId")}`;
 
-    const [URL, setUrl] = useState(`${rol == "administrador" ? rutaAdmin : rutaUser}`);
+    const [URL, setUrl] = useState(`${(rol == "administrador"||rol == "cajero") ? rutaAdmin : rutaUser}`);
 
     const [mesagge, setMessage] = useState("");
     const [incorrect, setIncorrect] = useState(false);
@@ -68,11 +68,11 @@ const BigCalendar = () => {
                         navigate("/");
                         throwMessage(body.message);
                     } else {
-                        throwMessage(body.message);
+                        // throwMessage(body.message);
                     }
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
 
                 throwMessage("No se encontraron datos... intente otra consulta.")
             }
@@ -244,7 +244,7 @@ const BigCalendar = () => {
 
     return (
         <>
-            {rol == "administrador" &&
+            {rol == "administrador"||rol == "cajero" &&
                 <Container fluid className="mx-auto p-2">
                     <Row className="mx-0">
                         <Col className="col-md-12">

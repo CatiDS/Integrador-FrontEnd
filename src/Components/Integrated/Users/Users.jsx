@@ -16,7 +16,7 @@ const Users = () => {
 
     const [mesagge, setMessage] = useState("");
     const [incorrect, setIncorrect] = useState(false);
-    const [URL, setUrl] = useState(`${rol == "administrador"? rutaAdmin : rutaUser}`);
+    const [URL, setUrl] = useState(`${(rol == "administrador"||rol == "cajero")? rutaAdmin : rutaUser}`);
     const [datosU, setdatosU] = useState([])
     const navigate = useNavigate();
     const token = sessionStorage.getItem("token");
@@ -38,7 +38,7 @@ const Users = () => {
                 // console.log((res.status))
                 if (res.status == 200) {
                     setdatosU(body);
-                    rol != "administrador" && localStorage.setItem("loggedPhone", body[0].nro_tel);
+                    (rol != "administrador"||rol != "cajero") && localStorage.setItem("loggedPhone", body[0].nro_tel);
 
                 } else {
 
@@ -71,7 +71,7 @@ const Users = () => {
     return (
 
         <>
-            {rol == "administrador" &&
+            {(rol == "administrador" ||rol == "cajero")&&
                 <Container fluid className="mx-auto p-2">
                     <Row className="mx-0">
                         <Col className="col-md-12">

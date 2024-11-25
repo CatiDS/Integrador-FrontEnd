@@ -18,6 +18,7 @@ function ControlNav() {
   const [client, setClient] = useState(true);
   const [waiter, setwaiter] = useState(true);
   const [cashier, setCashier] = useState(true);
+  const rol = localStorage.getItem("loggedRol");
 
   const nroMesas = [];
 
@@ -60,36 +61,39 @@ function ControlNav() {
       text-color="link dark"
       bs-nav-link-color="link-dark"
     >
-      {(renderMesas({ isActive }))}
-      {/* if ({isActive}) {
-        // tabClassName="nav-link disabled" desactiva al padre ClassName="nav-link disabled" desactiva los hijos
-        <Tab eventKey="mesas" title="Mesas" tabClassName="nav-link hidden" hidden={isActive}>
-        {
-          nroMesas.map((nros) => {
-            return <Tables key={nros} nro={nros} />
-          })
-        }
 
-      </Tab>
-      } */}
+{rol != "cliente" &&
+(renderMesas({ isActive }))
+      //  if ({isActive}) {
+        // tabClassName="nav-link disabled" desactiva al padre ClassName="nav-link disabled" desactiva los hijos
+      //   <Tab eventKey="mesas" title="Mesas" tabClassName="nav-link hidden" hidden={isActive}>
+      //   {
+      //     nroMesas.map((nros) => {
+      //       return <Tables key={nros} nro={nros} />
+      //     })
+      //   }
+
+      // </Tab>
+      // }
+
+}
 
       <Tab eventKey="reservas" title="Reservas" tabClassName="nav-link p-2">
         {/* <Reservation /> Ver si es necesario */}
-        {/* <Container flex className="flex"> */}
         <NewReservation className="align-self-end" />
-        <Button className="ms-0" onClick={armandoMesas}>  Armar mesas </Button>
-        {/* </Container> */}
+        {/* <Button className="ms-0" onClick={armandoMesas}>  Armar mesas </Button> */}
 
         <BigCalendar />
-        <Button onClick={armandoMesas}>  Armar mesas </Button>
+        {/* <Button onClick={armandoMesas}>  Armar mesas </Button> */}
       </Tab>
 
-      <Tab eventKey="productos" title="Productos" tabClassName="nav-link p-2">
-
+      {(rol == "administrador"||rol == "cajero")&&
+        <Tab eventKey="productos" title="Productos" tabClassName="nav-link p-2">
         <Products />
-
       </Tab>
-      <Tab eventKey="clientes" title="Usuarios" tabClassName="nav-link p-2">
+      }
+
+      <Tab eventKey="clientes" title="Datos de Usuario" tabClassName="nav-link p-2">
         <Users />
       </Tab>
     </Tabs>
