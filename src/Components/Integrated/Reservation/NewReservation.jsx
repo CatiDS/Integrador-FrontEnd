@@ -20,28 +20,10 @@ const NewReservation = () => {
     //////Ccalcular lugres antes de reservar
     // la primera mesa tiene 4 lugares  y  por cada mesa agregada se suman 2 lugares
 
-    // CREAR RESERVA:      post
-    // http://localhost:8080/reserva/      
-    // recibo del front el body                             
-
-    // {
-    //     "fecha_res": "",
-    //     "usuario_res": "",
-    //     "nombre": "",
-    //     "apellido": "",
-    //     "nro_tel": ,
-    //     "cant_personas":
-    // }
 
 
     const token = sessionStorage.getItem("token");
     const decoded = jwtDecode(token);
-
-    // localStorage.setItem("logged", true);
-    // navigate("/");
-    // handleClose();
-    // localStorage.setItem("loggedRol", decoded.rol);
-
 
     const idSesion = decoded.id                                 // id de sesion storage
     const nameSesion = decoded.nombre                           // nombre de sesion storage

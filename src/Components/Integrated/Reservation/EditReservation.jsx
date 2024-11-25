@@ -12,10 +12,10 @@ const EditReservation = (props) => {
     
     const [name, setName] = useState(props.resData.nombre);
     const [surname, setSurname] = useState(props.resData.apellido);
-    const [chargeDate, setChargeDate] = useState(props.resData.fecha_hoy);
+    const [chargeDate, setChargeDate] = useState(props.resData.fecha_carga);
     const [reservationDate, setReservationDate] = useState(props.resData.fecha_res);
     const [phone, setPhone] = useState(props.resData.nro_tel);
-    const [people, setPeople] = useState(props.resData.cant_pers);
+    const [people, setPeople] = useState(props.resData.cant_personas);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -30,7 +30,7 @@ const EditReservation = (props) => {
     const handleCancel =()=>{
         setName(props.resData.nombre);
         setSurname(props.resData.apellido);
-        setChargeDate(props.resData.fecha_hoy);
+        setChargeDate(props.resData.fecha_carga);
         setReservationDate(props.resData.fecha_res);
         setPhone(props.resData.nro_tel);
         setPeople(props.resData.cant_pers);

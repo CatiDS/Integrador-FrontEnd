@@ -11,6 +11,7 @@ import ReservationData from './Reservationdata'
 import NewReservation from '../Reservation/NewReservation'
 import FindBy from '../Users/FindBy'
 import { useNavigate } from 'react-router-dom'
+import FindRes from './FindRes'
 
 // MOSTAR TODAS LAS RESERVAS:  get
 // http://localhost:8080/reserva/   
@@ -191,31 +192,6 @@ const BigCalendar = () => {
 
         },
         {
-            start: dayjs('2024-11-05T10:30:00').toDate(),
-            end: dayjs('2024-11-05T12:30:00').toDate(),
-            title: "Flia Do Santo - 6 Lugares"
-        },
-        {
-            start: dayjs('2024-11-05T10:30:00').toDate(),
-            end: dayjs('2024-11-05T12:30:00').toDate(),
-            title: "Flia DoSanto - 6 Lugares"
-        },
-        {
-            start: dayjs('2024-11-05T10:30:00').toDate(),
-            end: dayjs('2024-11-05T12:30:00').toDate(),
-            title: "Flia Do Sanos - 6 Lugares"
-        },
-        {
-            start: dayjs('2024-11-12T10:30:00').toDate(),
-            end: dayjs('2024-11-12T12:30:00').toDate(),
-            title: "Flia Do Santos - 9 Lugares"
-        },
-        {
-            start: dayjs('2024-11-10T10:30:00').toDate(),
-            end: dayjs('2024-11-10T12:30:00').toDate(),
-            title: "Flia Do Satos - 3 Lugares"
-        },
-        {
             start: dayjs('2024-11-11T10:30:00').toDate(),
             end: dayjs('2024-11-11T12:30:00').toDate(),
             title: "Flia Do Santos - 6 Lugares",
@@ -245,22 +221,13 @@ const BigCalendar = () => {
             }
 
         },
-        {
-            start: dayjs('2024-11-07T10:30:00').toDate(),
-            end: dayjs('2024-11-07T12:30:00').toDate(),
-            title: "Flia DoSatos - 6 Lugares"
-        },
-        {
-            start: dayjs('2024-11-07T10:30:00').toDate(),
-            end: dayjs('2024-11-07T12:30:00').toDate(),
-            title: "Flia Do Santos - 2 Lugares"
-        },
 
     ]
 
 
 
     const verInfo = (e) => {
+        console.log(e.data)
         setDatas(e.data);
         setModalShow(true);
     }
@@ -281,7 +248,8 @@ const BigCalendar = () => {
                 <Container fluid className="mx-auto p-2">
                     <Row className="mx-0">
                         <Col className="col-md-12">
-                            {/* <FindBy datos={setUrl} /> */}
+                            <FindRes datos={setUrl} />
+                            
                         </Col>
                     </Row>
                     {incorrect && <FormLabel className="text-danger fs-3" >{mesagge}</FormLabel>}

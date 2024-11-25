@@ -63,7 +63,7 @@ const DeleteReservation = (props) => {
                             label="Fecha de carga"
                             className="mb-3 "
                         >
-                            <Form.Control type="text" placeholder="Fecha de carga" value={props.resData.fecha_hoy} readOnly />
+                            <Form.Control type="text" placeholder="Fecha de carga" value={props.resData.fecha_carga} readOnly />
                         </FloatingLabel>
 
                         <FloatingLabel

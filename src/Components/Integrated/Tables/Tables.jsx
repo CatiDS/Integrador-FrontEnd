@@ -33,7 +33,13 @@ function Tables(props) {
         { id: 8, producto: "Plato Niño", precio: 40, cantidad: 5, subtotal: 150 },
         { id: 9, producto: "Olivia", precio: 22, cantidad: 5, subtotal: 150 },
         { id: 10, producto: "Michael", precio: 40, cantidad: 5, subtotal: 150 },
-        { id: 11, producto: "Olivia", precio: 22, cantidad: 5, subtotal: 150 }
+        { id: 11, producto: "Olivia", precio: 22, cantidad: 5, subtotal: 150 },
+        { id: 12, producto: "Plato Niño", precio: 30, cantidad: 5, subtotal: 150 },
+        { id: 13, producto: "Plato Niño", precio: 50, cantidad: 5, subtotal: 150 },
+        { id: 14, producto: "Plato Niño", precio: 60, cantidad: 5, subtotal: 150 },
+        { id: 15, producto: "Plato Niño", precio: 70, cantidad: 5, subtotal: 150 },
+        { id: 16, producto: "Plato Niño", precio: 80, cantidad: 5, subtotal: 150 },
+        { id: 17, producto: "Plato Niño", precio: 40, cantidad: 5, subtotal: 150 },
     ];
 
 

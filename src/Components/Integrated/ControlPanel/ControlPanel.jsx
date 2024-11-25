@@ -8,29 +8,8 @@ const ControlPanel = () => {
     <Container fluid>
         <ControlNav/>
       <div>
-      <p>
-            Un contenido
-        </p>
         <p>
-            Mas Grande
-        </p>
-        <p>
-            otro contenido
-        </p>
-        <p>
-            tambien contenido
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae ea fugit ullam, alias praesentium natus incidunt quo excepturi voluptates. Velit laborum, iure blanditiis odit quos dignissimos! Dolores animi dolorem ducimus.
-        </p>
-        <p>
-            tambien contenido
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae ea fugit ullam, alias praesentium natus incidunt quo excepturi voluptates. Velit laborum, iure blanditiis odit quos dignissimos! Dolores animi dolorem ducimus.
-        </p>
-        <p>
-            tambien contenido
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae ea fugit ullam, alias praesentium natus incidunt quo excepturi voluptates. Velit laborum, iure blanditiis odit quos dignissimos! Dolores animi dolorem ducimus.
-        </p>
-        <p>
-            tambien contenido
+            Recuerde abrir las reservas antes de iniciar la jornada
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae ea fugit ullam, alias praesentium natus incidunt quo excepturi voluptates. Velit laborum, iure blanditiis odit quos dignissimos! Dolores animi dolorem ducimus.
         </p>
       </div>
