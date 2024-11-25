@@ -124,7 +124,7 @@ function Register(props) {
     return (
 
         <>
-            <ButtonToolbar hidden={hiddens} className="registerButton p-1 my-1 mx-2 btn btn-outline-light align-self-end" type="button" onClick={handleShow}>Regístrate</ButtonToolbar>
+            <ButtonToolbar className="registerButton p-1 my-1 mx-2 btn btn-outline-light align-self-end" type="button" onClick={handleShow}>Regístrate</ButtonToolbar>
 
             <Modal
                 show={show}

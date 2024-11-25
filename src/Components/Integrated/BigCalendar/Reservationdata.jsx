@@ -47,7 +47,7 @@ function ReservationData(props) {
 
                                 <tbody>
                                     <tr key={row.id_reserva}>
-                                        <td>{row.fecha_hoy}</td>
+                                        <td>{row.fecha_carga}</td>
                                         <td>{row.fecha_res}</td>
                                         <td>{row.nro_tel}</td>
                                         <td>{row.cant_personas}</td>

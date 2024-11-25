@@ -49,7 +49,7 @@ const FindBy = (props) => {
         <>
             <Form.Group as={Row} className="mb-2"  >
                 <Row className="mt-2">
-                    <Form.Label as="legend" column sm={2}> Filtrar Por: </Form.Label>
+                    <Form.Label as="legend" htmlFor="find_user" column sm={2}> Filtrar Por: </Form.Label>
 
                     {/* <Col sm={3}> 
                              <Form.Check
@@ -97,6 +97,7 @@ const FindBy = (props) => {
 
             <InputGroup className="mb-3">
                 <Form.Control
+                    id='find_user'
                     placeholder="Buscar Usuario"
                     aria-label="Buscar Usuario"
                     aria-describedby="basic-addon2"

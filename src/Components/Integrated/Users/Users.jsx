@@ -10,13 +10,16 @@ import { FormLabel, Table, Col, Container, Row } from "react-bootstrap";
 
 const Users = () => {
 
+    const rol = localStorage.getItem("loggedRol");
+    const rutaAdmin = "http://localhost:8080/usuario/";
+    const rutaUser = `http://localhost:8080/usuario/id/${localStorage.getItem("loggedId")}`;
+
     const [mesagge, setMessage] = useState("");
     const [incorrect, setIncorrect] = useState(false);
-    const [URL, setUrl] = useState(`${(localStorage.getItem("loggedRol") == "administrador") ? "http://localhost:8080/usuario/" : `http://localhost:8080/usuario/apellido/${localStorage.getItem("loggedLastName")}`}`)
+    const [URL, setUrl] = useState(`${rol == "administrador"? rutaAdmin : rutaUser}`);
     const [datosU, setdatosU] = useState([])
     const navigate = useNavigate();
     const token = sessionStorage.getItem("token");
-    const [ROL, setROL] = useState(localStorage.getItem("loggedRol"));
 
     const params = {
         method: 'GET',
@@ -35,6 +38,7 @@ const Users = () => {
                 // console.log((res.status))
                 if (res.status == 200) {
                     setdatosU(body);
+                    rol != "administrador" && localStorage.setItem("loggedPhone", body[0].nro_tel);
 
                 } else {
 
@@ -67,7 +71,7 @@ const Users = () => {
     return (
 
         <>
-            {ROL == "administrador" &&
+            {rol == "administrador" &&
                 <Container fluid className="mx-auto p-2">
                     <Row className="mx-0">
                         <Col className="col-md-12">

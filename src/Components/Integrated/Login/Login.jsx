@@ -80,11 +80,12 @@ function Login(props) {
             localStorage.removeItem("loggedName");
             localStorage.removeItem("loggedLastName");
             localStorage.removeItem("loggedRol");
+            localStorage.removeItem("loggedId");
             localStorage.setItem("logged", false);
 
             const res = await fetch(URL, params);       //fetch y respuesta
             const body = await res.json();
-            
+            console.log (body)
             if (res.status == 200) {                 // seteamos los valores de nombre,apellido, rol, logueado y token
 
                 sessionStorage.setItem("token", body.token);
@@ -92,6 +93,7 @@ function Login(props) {
                 navigate("/");
                 handleClose();
                 const decoded = jwtDecode(body.token);
+                localStorage.setItem("loggedId", decoded.id);
                 localStorage.setItem("loggedName", decoded.nombre);
                 localStorage.setItem("loggedLastName", decoded.apellido);
                 localStorage.setItem("loggedRol", decoded.rol);

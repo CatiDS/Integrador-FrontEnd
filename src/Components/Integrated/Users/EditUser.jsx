@@ -265,6 +265,7 @@ const EditUser = (props) => {
 
                         </>
                         {incomplete && <FormLabel className="text-danger">{mesagge}</FormLabel>}
+                        {/* {success && <FormLabel className="text-success">{mesagge}</FormLabel>} */}
 
                     </Modal.Body>
                     <Modal.Footer>
