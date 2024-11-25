@@ -244,7 +244,7 @@ const BigCalendar = () => {
 
     return (
         <>
-            {rol == "administrador"||rol == "cajero" &&
+            {(rol == "administrador"||rol == "cajero")&&
                 <Container fluid className="mx-auto p-2">
                     <Row className="mx-0">
                         <Col className="col-md-12">
