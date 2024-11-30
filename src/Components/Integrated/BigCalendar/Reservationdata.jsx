@@ -16,7 +16,8 @@ function ReservationData(props) {
     // const handleShow = () => setShow(true);
 
     const row = props.data;
-
+    // const seturl= props.churl;
+    
     return (
         <>
             <Modal
@@ -53,7 +54,9 @@ function ReservationData(props) {
                                         <td>{row.cant_personas}</td>
                                         <td>
                                             <EditReservation resData={row}/>
-                                            <DeleteReservation resData={row}/>
+                                            <DeleteReservation resData={row} 
+                                            // setUrl={seturl}
+                                            />
                                         </td>
                                     </tr>
                                 </tbody>

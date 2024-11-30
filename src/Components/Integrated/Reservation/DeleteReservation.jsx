@@ -6,23 +6,66 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { FormLabel } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const DeleteReservation = (props) => {
 
+    const navigate = useNavigate();
+    
+    const token = sessionStorage.getItem("token");
+    let URL = `http://localhost:8080/reserva/cancelar/${props.resData.id_reserva}`;
+    const url =`http://localhost:8080/reserva/buscar/${props.resData.id_reserva}`;
+    const nombres = props.resData.apellido + ", " + props.resData.nombre
+    const setUrl= props.setUrl;
+
+    const [mesagge, setMessage] = useState("");
+    const [incorrect, setIncorrect] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+    }
 
-    const nombres = props.resData.apellido + ", " + props.resData.nombre
+    const params = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': token,
+        },
+    }
 
-    const mostrar = () => console.log("todo ok, implementar el delete a db");
-    // const [tables, setTables]= useState([]);
-    // useEffect(
-    //     ()=>{
-    //         fetch('URL').then(response=>response.json()).then(data=>setTables(data));
-    //     },
-    //     [funcion de disparo]
-    // )
+    // //-----------------------------------------------------------------------------
+// const mostrar = () => console.log("todo ok, implementar el delete a db");
+    const deleteUser = async () => {
+        // URL = `http://localhost:8080/usuario/${props.users.id_usuario}`
+        // console.log(URL)
+
+        try {
+            const res = await fetch(URL, params);
+            const body = await res.json();
+            if (res.status == 200) {
+                 handleClose();
+                navigate("/panel");
+            }
+            else {
+                console.log(body.error)
+                throwMessage(body.message)
+            }
+            // setUrl(url);
+        }
+        catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    const throwMessage = (newMessage) => {
+        setMessage(newMessage)
+        setIncorrect(true);
+        setTimeout(() => {
+            setIncorrect(false);
+        }, 3000);
+    }
+
 
 
     return (
@@ -92,13 +135,14 @@ const DeleteReservation = (props) => {
 
 
                     </>
+                    {incorrect && <FormLabel className="text-danger fs-3" >{mesagge}</FormLabel>}
 
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="dark" onClick={mostrar}>Eliminar</Button>
+                    <Button variant="dark" onClick={deleteUser}>Eliminar</Button>
                 </Modal.Footer>
             </Modal>
         </>

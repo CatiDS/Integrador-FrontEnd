@@ -1,26 +1,23 @@
-
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { FcPlanner } from "react-icons/fc";
-import dayjs, { Dayjs } from 'dayjs';
-import "dayjs/locale/es"
-import { jwtDecode } from 'jwt-decode';
+import Button from 'react-bootstrap/Button';
 import { FormLabel } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import dayjs from 'dayjs';
+import "dayjs/locale/es"
 dayjs.locale("es");
-
-
-
 
 const NewReservation = () => {
 
     //////Ccalcular lugres antes de reservar
     // la primera mesa tiene 4 lugares  y  por cada mesa agregada se suman 2 lugares
 
-
+    const navigate = useNavigate();
 
     const token = sessionStorage.getItem("token");
     const decoded = jwtDecode(token);
@@ -70,6 +67,7 @@ const NewReservation = () => {
 
     const handleCancel = () => {
 
+        handleClose();
         setName("");
         setSurname("");
         setChargeDate("");
@@ -77,7 +75,6 @@ const NewReservation = () => {
         setPhone("");
         setPeople("");
 
-        handleClose();
     }
 
     const throwMessage = (newMessage,mode) => {
@@ -124,16 +121,16 @@ const NewReservation = () => {
 
                 })
         }
-        console.log(params)
+        // console.log(params)
 
         try {
             const res = await fetch(URL, params);
             const body = await res.json();
             // console.log(body);
             if (res.status == 201) {
-                // navigate("/");
-                handleCancel();
+                navigate("/panel");
                 throwMessage("Reserva agendada!. Te esperamos!","good");
+                handleCancel();
 
             }
             else {

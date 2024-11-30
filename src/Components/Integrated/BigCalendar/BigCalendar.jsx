@@ -227,7 +227,7 @@ const BigCalendar = () => {
 
 
     const verInfo = (e) => {
-        console.log(e.data)
+        // console.log(e.data)
         setDatas(e.data);
         setModalShow(true);
     }
@@ -292,9 +292,9 @@ const BigCalendar = () => {
             <ReservationData
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                data={datas}
+                data={datas} 
+                furl={setUrl}
             />
-
         </>
     )
 }

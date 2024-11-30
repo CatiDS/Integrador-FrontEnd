@@ -6,11 +6,15 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { FormLabel } from 'react-bootstrap';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { useNavigate } from "react-router-dom";
+
 
 const DeleteClient = (props) => {
     const token = sessionStorage.getItem("token");
-    let URL = `http://localhost:8080/usuario/mail/${props.users.mail}`
-    const url = `http://localhost:8080/usuario/`
+    let URL = `http://localhost:8080/usuario/mail/${props.users.mail}`;
+    const url = `http://localhost:8080/usuario/`;
+
+    const navigate = useNavigate();
 
     const [mesagge, setMessage] = useState("");
     const [incorrect, setIncorrect] = useState(false);
@@ -43,6 +47,7 @@ const DeleteClient = (props) => {
             const body = await res.json();
             if (res.status == 200) {
                 handleClose();
+                navigate("/");
             }
             else {
                 console.log(body.error)

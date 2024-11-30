@@ -9,6 +9,7 @@
 
 .cristal .modal-dialog{
     overflow-x: auto;
+    min-width: max-content;
 }
 
 .form-check-input:checked {
